@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Git Master Branch') {
             steps {
-                git credentialsId: 'dali05', url: 'https://github.com/dali0505/catprices.git'
+                git credentialsId: 'dali05', url: 'https://github.com/dali05/catprices.git'
             }
         }
         stage('Build') {
