@@ -17,5 +17,5 @@ spec:
     spec:
       containers:
         - name: catprices-app
-          image: dali/catprices:latest
-          imagePullPolicy: Always
+          image: dali/catprices:latest # Mettez à jour avec le chemin de l'image locale
+          imagePullPolicy: Never # Indiquez de ne pas essayer de tirer l'image depuis Docker Hub
