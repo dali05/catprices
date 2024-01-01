@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: default
+  name: catprices-app
+  labels:
+    app: catprices-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: catprices-app
+  template:
+    metadata:
+      labels:
+        app: catprices-app
+    spec:
+      containers:
+        - name: catprices-app
+          image: dali/catprices:latest
+          imagePullPolicy: Always
+          env:
+            - name: DATABASE_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: catprices-configmap
+                  key: DATABASE_USERNAME
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: catprices-configmap
+                  key: DATABASE_PASSWORD
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: catprices-configmap
+                  key: DATABASE_HOST
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: catprices-configmap
+                  key: DATABASE_PORT
+            - name: DATABASE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: catprices-configmap
+                  key: DATABASE_NAME
+            - name: JWT_SECRETE
+              valueFrom:
+                configMapKeyRef:
+                  name: catprices-configmap
+                  key: JWT_SECRETE
+      imagePullSecrets:
+        - name: docker-auth
