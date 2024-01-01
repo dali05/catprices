@@ -20,7 +20,7 @@ pipeline {
         }
         stage('Push Docker Image') {
             steps {
-              withCredentials([string(credentialsId: 'docker', variable: 'DOCKER_CREDENTIALS')]) {
+              withCredentials([string(credentialsId: 'Docker', variable: 'DOCKER_CREDENTIALS')]) {
               sh "echo $DOCKER_CREDENTIALS | docker login -u mon_nom_utilisateur --password-stdin"
               sh "docker push dali/catprices:latest"
                              }
