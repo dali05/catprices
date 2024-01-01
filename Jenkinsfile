@@ -18,14 +18,6 @@ pipeline {
                 bat 'docker build -t dali05/catprices:latest .'
             }
         }
-        stage('Push Docker Image') {
-            steps {
-             withCredentials([usernamePassword(credentialsId: 'Docker', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-             sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
-             bat 'docker push dali05/catprices:latest'
-             }
-            }
-        }
         stage('Deploy To Test') {
             steps {
                 bat 'kubectl apply -f deployment.yaml'
